@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/go-yaml/yaml"
+	"gopkg.in/yaml.v3"
 )
 
 type Config struct {
@@ -18,7 +18,7 @@ type ServerConfig struct {
 }
 
 type EthereumConfig struct {
-	RPCURL  string `yaml:"rpc_url"` //the graph
+	RPCURL  string `yaml:"rpc_url"`
 	Timeout string `yaml:"timeout"`
 }
 
@@ -53,7 +53,7 @@ func defaultConfig() *Config {
 	return &Config{
 		Server: ServerConfig{
 			Host: "localhost",
-			Port: ":1337",
+			Port: "1337",
 		},
 		Ethereum: EthereumConfig{
 			RPCURL:  "http://localhost:8545",

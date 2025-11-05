@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/DiDinar5/1inch_test_task/domain"
+	"github.com/DiDinar5/mini-dex-aggregator/domain"
 	"github.com/labstack/echo/v4"
 )
 
