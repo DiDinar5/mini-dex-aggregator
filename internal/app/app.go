@@ -11,6 +11,7 @@ import (
 
 	"github.com/DiDinar5/mini-dex-aggregator/config"
 	"github.com/DiDinar5/mini-dex-aggregator/infrastructure/ethereum"
+	"github.com/DiDinar5/mini-dex-aggregator/infrastructure/thegraph"
 	"github.com/DiDinar5/mini-dex-aggregator/internal/handler"
 	"github.com/DiDinar5/mini-dex-aggregator/internal/middlewares/validator"
 	"github.com/DiDinar5/mini-dex-aggregator/internal/usecase"
@@ -24,7 +25,9 @@ func Run(cfg config.Config) {
 		log.Fatalf("Failed to initialize Ethereum service: %v", err)
 	}
 
-	usecaseInstance := usecase.NewUsecase(ethereumService)
+	graphService := thegraph.NewTheGraphService(cfg.TheGraph.UniswapV2URL, cfg.TheGraph.MinTVL)
+
+	usecaseInstance := usecase.NewUsecase(ethereumService, graphService, cfg.TheGraph.MinTVL)
 
 	handlerInstance := handler.NewHandler(usecaseInstance)
 

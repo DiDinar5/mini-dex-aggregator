@@ -6,7 +6,6 @@ import (
 	"github.com/DiDinar5/mini-dex-aggregator/domain"
 )
 
-// CombinedUsecase implements both Estimate and Quote usecases
 type CombinedUsecase struct {
 	estimateUsecase *EstimateUsecase
 	quoteUsecase    *QuoteUsecase
@@ -20,10 +19,10 @@ func (c *CombinedUsecase) Quote(ctx context.Context, req domain.QuoteRequest) (d
 	return c.quoteUsecase.Quote(ctx, req)
 }
 
-func NewUsecase(ethereumService domain.EthereumServiceInterface) domain.UsecaseInterface {
+func NewUsecase(ethereumService domain.EthereumServiceInterface, graphService domain.TheGraphServiceInterface, minTVL float64) domain.UsecaseInterface {
 	return &CombinedUsecase{
 		estimateUsecase: NewEstimateUsecase(ethereumService),
-		quoteUsecase:    NewQuoteUsecase(ethereumService),
+		quoteUsecase:    NewQuoteUsecase(ethereumService, graphService, minTVL),
 	}
 }
 

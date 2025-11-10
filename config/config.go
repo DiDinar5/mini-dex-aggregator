@@ -10,6 +10,7 @@ import (
 type Config struct {
 	Server   ServerConfig   `yaml:"server"`
 	Ethereum EthereumConfig `yaml:"ethereum"`
+	TheGraph TheGraphConfig `yaml:"thegraph"`
 }
 
 type ServerConfig struct {
@@ -20,6 +21,11 @@ type ServerConfig struct {
 type EthereumConfig struct {
 	RPCURL  string `yaml:"rpc_url"`
 	Timeout string `yaml:"timeout"`
+}
+
+type TheGraphConfig struct {
+	UniswapV2URL string  `yaml:"uniswap_v2_url"`
+	MinTVL       float64 `yaml:"min_tvl"`
 }
 
 func Load() *Config {
@@ -56,8 +62,12 @@ func defaultConfig() *Config {
 			Port: "1337",
 		},
 		Ethereum: EthereumConfig{
-			RPCURL:  "http://localhost:8545",
+			RPCURL:  "",
 			Timeout: "30s",
+		},
+		TheGraph: TheGraphConfig{
+			UniswapV2URL: "",
+			MinTVL:       10000.0, // $10,000 minimum TVL
 		},
 	}
 }
