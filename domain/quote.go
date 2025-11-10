@@ -16,8 +16,20 @@ type QuoteResponse struct {
 }
 
 type DEXQuote struct {
-	DEX      string `json:"dex"`
-	Pool     string `json:"pool"`
-	ToAmount string `json:"to_amount"`
-	Price    string `json:"price,omitempty"`
+	DEX      string    `json:"dex"`
+	Pool     string    `json:"pool"`
+	ToAmount string    `json:"to_amount"`
+	Price    string    `json:"price,omitempty"`
+	PoolInfo *PoolInfo `json:"pool_info,omitempty"`
+}
+
+type PoolInfo struct {
+	TVL          string `json:"tvl"`
+	Volume24h    string `json:"volume_24h"`
+	Fees24h      string `json:"fees_24h"`
+	Reserve0     string `json:"reserve0"`
+	Reserve1     string `json:"reserve1"`
+	Token0Symbol string `json:"token0_symbol"`
+	Token1Symbol string `json:"token1_symbol"`
+	IsActive     bool   `json:"is_active"`
 }
